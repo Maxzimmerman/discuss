@@ -1,0 +1,15 @@
+<.form for={@changeset} action={~p"/topics"} method="post" :let={f}>
+  <div class="form-group">
+    <.input 
+      field={f[:title]}
+      placeholder="Title"
+      class="form-control"
+    />
+    <%= for {msg, _} <- Keyword.get_values(@changeset.errors, :title) do %>
+      <p><%= msg %></p>
+    <% end %>
+  </div>
+  <div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </div>
+</.form>
