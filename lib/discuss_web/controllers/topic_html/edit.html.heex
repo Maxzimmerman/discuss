@@ -1,0 +1,15 @@
+<.form for={@changeset} 
+       action={~p"/topics/#{@topic.id}/update"} 
+       method="put" 
+       :let={f}>
+
+  <div class="form-group">
+    <.input 
+      field={f[:title]}
+      placeholder={"#{@topic.title}"}
+      class="form-control"
+    />
+  </div>
+
+  <button type="submit" class="btn btn-primary">Submit</button>
+</.form>
