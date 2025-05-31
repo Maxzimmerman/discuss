@@ -4,14 +4,17 @@
     <%= for topic <- @topics do %>
         <li class="collection-item">
             <%= topic.title %>
-            <.link 
-                navigate={~p"/topics/#{topic.id}/edit"}
-                >
-                <button>Update</button>
-            </.link>
-            <.link href={~p"/topics/#{topic.id}/delete"} method="delete" data-confirm="Are you sure?">
-                <button>Delete</button>
-            </.link>
+
+            <%= if @conn.assigns.user.id == topic.user_id do %>
+                <.link 
+                    navigate={~p"/topics/#{topic.id}/edit"}
+                    >
+                    <button>Update</button>
+                </.link>
+                <.link href={~p"/topics/#{topic.id}/delete"} method="delete" data-confirm="Are you sure?">
+                    <button>Delete</button>
+                </.link>
+            <% end %>
         </li>
     <% end %>
 </ul>
