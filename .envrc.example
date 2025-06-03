@@ -1,0 +1,2 @@
+export GITHUB_CLIENT_ID=yourclientid
+export GITHUB_CLIENT_SECRET=yoursecret
