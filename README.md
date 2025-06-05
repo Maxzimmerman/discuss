@@ -39,28 +39,78 @@ Ensure you have:
 
 You’ll also need to [register a GitHub OAuth app](https://github.com/settings/developers) to get your `GITHUB_CLIENT_ID` and `GITHUB_CLIENT_SECRET`.
 
+The URLs to use for setting up OAuth and running it locally will be:
+
+Homepage URL: http://localhost:4000
+Application Callback URL: http://localhost:4000/github/callback
+
 ### Setup Instructions
 
-```bash
-# Clone the repository
+#### Clone the repository
+
+```sh
 git clone https://github.com/yourusername/discuss.git
 cd discuss
+```
 
-# Install dependencies
+#### Install dependencies
+
+```sh
 mix deps.get
+```
 
-# Set up the database
+#### Set up the database
+
+```sh
 mix ecto.setup
+```
 
-# Install frontend assets
+#### Install frontend assets
+
+```sh
 cd assets && npm install && cd ..
+```
 
-# Set your environment variables
+#### Install `direnv` for managing local environment variables
+
+```sh
+brew install direnv
+```
+
+#### Copy `.envrc.example`
+
+```sh
+cp .envrc.example .envrc
+```
+
+#### Set your environment variables in `.envrc`
+
+Change these values to the ones you generated above when registering the OAuth app on Github:
+
+```sh
 export GITHUB_CLIENT_ID=yourclientid
 export GITHUB_CLIENT_SECRET=yoursecret
+```
 
-# Run the server
+Then run:
+
+```sh
+direnv allow
+```
+
+This will set those env vars every time you `cd` into this directory now.
+
+## Run the server
+
+```sh
 mix phx.server
+```
+
+or for debugging:
+
+```sh
+iex -S mix phx.server
+```
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
