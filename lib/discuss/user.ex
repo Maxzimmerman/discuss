@@ -20,4 +20,10 @@ defmodule Discuss.User do
     |> cast(params, [:email, :provider, :token])
     |> validate_required([:email, :provider, :token])
   end
+
+  def email_changeset(struct, params \\ %{}) do
+    struct
+    |> cast(params, [:email])
+    |> validate_required([:email])
+  end
 end

@@ -1,0 +1,14 @@
+<h1>Sign up</h1>
+
+<.form for={@changeset} action={~p"/auth/create_user"} method="post" :let={f}>
+  <div class="form-group">
+    <.input 
+      field={f[:email]}
+      placeholder="Title"
+      class="form-control"
+    />
+  </div>
+  <div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </div>
+</.form>

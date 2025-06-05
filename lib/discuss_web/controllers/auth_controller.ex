@@ -18,6 +18,26 @@ defmodule DiscussWeb.AuthController do
     |> redirect(to: ~p"/")
   end
 
+  def login(conn, _params) do
+    changeset = User.changeset(%User{}, %{})
+    render(conn, :login, changeset: changeset)
+  end
+
+  def log_user_in(conn, %{"user" => user}) do
+    changeset = User.changeset(%User{}, user)
+    signin(conn, changeset)
+  end
+
+  def signup(conn, _params) do
+    changeset = User.changeset(%User{}, %{})
+    render(conn, :signup, changeset: changeset)
+  end
+
+  def create_user(conn, %{"user" => user}) do
+    changeset = User.email_changeset(%User{}, user)
+    signin(conn, changeset)
+  end
+
   def signout(conn, _params) do
     conn
     |> configure_session(drop: true)
@@ -28,7 +48,7 @@ defmodule DiscussWeb.AuthController do
     case insert_or_update_user(changeset) do
       {:ok, user} ->
         conn
-        |> put_flash(:info, "Welcome back!")
+        |> put_flash(:info, "Welcome back! #{user.email}")
         |> put_session(:user_id, user.id)
         |> redirect(to: ~p"/")
       {:error, _reason} ->
